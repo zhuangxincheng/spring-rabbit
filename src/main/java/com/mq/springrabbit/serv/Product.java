@@ -1,6 +1,8 @@
 package com.mq.springrabbit.serv;
 
+import com.alibaba.fastjson.JSON;
 import com.mq.springrabbit.config.Configinfo;
+import com.mq.springrabbit.config.MessageDO;
 import com.mq.springrabbit.config.RestResult;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "")
@@ -25,7 +28,11 @@ public class Product {
         RestResult result = new RestResult();
         Map<String,Object> data = new HashMap<String, Object>();
         String message = "test";
-        rabbitTemplate.convertAndSend(Configinfo.QUEUE, message);
+        MessageDO messageDO = new MessageDO();
+        messageDO.setMessageName("message");
+        messageDO.setMessageValue(message);
+        messageDO.setMessageId(UUID.randomUUID().toString());
+        rabbitTemplate.convertAndSend(Configinfo.QUEUE, JSON.toJSON(messageDO).toString());
         return result;
     }
 }
