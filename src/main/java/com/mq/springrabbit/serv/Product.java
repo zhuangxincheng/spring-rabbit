@@ -34,6 +34,8 @@ public class Product {
         messageDO.setMessageValue(message);
         messageDO.setMessageId(UUID.randomUUID().toString());
         rabbitTemplate.convertAndSend(Configinfo.QUEUE, JSON.toJSON(messageDO).toString());
+        data.put("message",messageDO);
+        result.setResponseData(data);
         return result;
     }
 }

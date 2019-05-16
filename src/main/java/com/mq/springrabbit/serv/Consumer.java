@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component;
 public class Consumer {
     private static Logger logger = LoggerFactory.getLogger(Consumer.class);
 
+    /**
+     * 消费者
+     * @param message
+     */
     @RabbitListener(queues = Configinfo.QUEUE)
     public void receive(Message message) {
 
