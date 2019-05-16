@@ -8,6 +8,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class Product {
      * 生产者（send）
      */
     @RequestMapping(value = "message/send",method = RequestMethod.GET)
-    public RestResult send() {
+    public RestResult send(@RequestParam(required = false) String mess) {
         RestResult result = new RestResult();
         Map<String,Object> data = new HashMap<String, Object>();
         String message = "test";
