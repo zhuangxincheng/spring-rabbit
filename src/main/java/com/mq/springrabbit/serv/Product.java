@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.mq.springrabbit.config.Configinfo;
 import com.mq.springrabbit.config.MessageDO;
 import com.mq.springrabbit.config.RestResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,8 @@ public class Product {
     @Autowired
     RabbitTemplate rabbitTemplate;
 
+    private static Logger logger =  LoggerFactory.getLogger(Product.class);
+
     /**
      * 生产者（send）
      */
@@ -29,6 +33,8 @@ public class Product {
         RestResult result = new RestResult();
         Map<String,Object> data = new HashMap<String, Object>();
         String message = "test";
+        StringBuilder sad = new StringBuilder();
+        sad.append("asdfffd");
         MessageDO messageDO = new MessageDO();
         messageDO.setMessageName("message");
         messageDO.setMessageValue(message);
